@@ -1,0 +1,5 @@
+tool:
+  - name: SharpMove
+    description:  .NET authenticated execution for remote hosts
+    gitLink: https://github.com/0xthirteen/SharpMove
+    solutionPath: SharpMove\SharpMove\SharpMove.sln

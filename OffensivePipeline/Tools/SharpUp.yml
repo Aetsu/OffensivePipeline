@@ -1,0 +1,5 @@
+tool:
+  - name: SharpUp
+    description: SharpUp is a C# port of various PowerUp functionality
+    gitLink: https://github.com/GhostPack/SharpUp
+    solutionPath: SharpUp\SharpUp.sln

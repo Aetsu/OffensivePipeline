@@ -1,0 +1,5 @@
+tool:
+  - name: SharpView
+    description: .NET port of PowerView
+    gitLink: https://github.com/tevora-threat/SharpView
+    solutionPath: SharpView\SharpView.sln

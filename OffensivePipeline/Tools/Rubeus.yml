@@ -1,0 +1,5 @@
+tool:
+  - name: Rubeus
+    description: Rubeus is a C# toolset for raw Kerberos interaction and abuses
+    gitLink: https://github.com/GhostPack/Rubeus
+    solutionPath: Rubeus\Rubeus.sln

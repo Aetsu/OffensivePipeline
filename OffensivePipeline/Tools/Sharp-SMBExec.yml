@@ -1,0 +1,5 @@
+tool:
+  - name: Sharp-SMBExec
+    description: A native C# conversion of Kevin Robertsons Invoke-SMBExec powershell script
+    gitLink: https://github.com/checkymander/Sharp-SMBExec
+    solutionPath: Sharp-SMBExec\SharpInvoke-SMBExec.sln

@@ -1,0 +1,5 @@
+tool:
+  - name: InveighZero
+    description: InveighZero is a C# LLMNR/NBNS/mDNS/DNS/DHCPv6 spoofer and man-in-the-middle tool
+    gitLink: https://github.com/Kevin-Robertson/InveighZero
+    solutionPath: InveighZero\Inveigh.sln

@@ -1,0 +1,5 @@
+tool:
+  - name: SharpRDP
+    description:  Remote Desktop Protocol Console Application for Authenticated Command Execution
+    gitLink: https://github.com/0xthirteen/SharpRDP
+    solutionPath: SharpRDP\SharpRDP\SharpRDP.sln

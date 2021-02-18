@@ -1,0 +1,5 @@
+tool:
+  - name: Internal-Monologue
+    description: Retrieving NTLM Hashes without Touching LSASS
+    gitLink: https://github.com/eladshamir/Internal-Monologue
+    solutionPath: Internal-Monologue\InternalMonologue.sln

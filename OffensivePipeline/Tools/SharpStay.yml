@@ -1,0 +1,5 @@
+tool:
+  - name: SharpStay
+    description: .NET Persistence
+    gitLink: https://github.com/0xthirteen/SharpStay
+    solutionPath: SharpStay\SharpStay\SharpStay.sln

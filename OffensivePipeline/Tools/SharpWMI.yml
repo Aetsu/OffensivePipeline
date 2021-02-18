@@ -1,0 +1,5 @@
+tool:
+  - name: SharpWMI
+    description: SharpWMI is a C# implementation of various WMI functionality.
+    gitLink: https://github.com/GhostPack/SharpWMI
+    solutionPath: SharpWMI\SharpWMI.sln

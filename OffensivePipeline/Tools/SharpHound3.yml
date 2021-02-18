@@ -1,0 +1,5 @@
+tool:
+  - name: SharpHound3
+    description: C# Rewrite of the BloodHound Ingestor
+    gitLink: https://github.com/BloodHoundAD/SharpHound3
+    solutionPath: SharpHound3\SharpHound3.sln

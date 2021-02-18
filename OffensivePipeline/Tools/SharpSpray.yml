@@ -1,0 +1,5 @@
+tool:
+  - name: SharpSpray
+    description: SharpSpray a simple code set to perform a password spraying attack against all users of a domain using LDAP and is compatible with Cobalt Strike.
+    gitLink: https://github.com/jnqpblc/SharpSpray
+    solutionPath: SharpSpray\SharpSpray.sln

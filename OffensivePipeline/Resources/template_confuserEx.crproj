@@ -1,0 +1,4 @@
+<project outputDir="{{OUTPUT_DIR}}" baseDir="{{BASE_DIR}}" xmlns="http://confuser.codeplex.com">
+  <packer id="compressor" />
+  <module path="{{EXE_FILE}}" />
+</project>
