@@ -43,7 +43,8 @@ namespace OffensivePipeline
                             if (Helpers.ExecuteCommand("RMDIR \"" + toolPath + "\" /S /Q") != 0)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Error -> RMDIR: {0}", toolPath);
+                                Console.WriteLine("         Error -> RMDIR: {0}", toolPath);
+                                Helpers.LogToFile("AnalyzeTools", "ERROR", "RMDIR: <" + toolPath + ">");
                                 Console.ResetColor();
                             }
                             Build.Confuse(outputFolder);
@@ -54,7 +55,8 @@ namespace OffensivePipeline
                         } 
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Error analyzing: <{0}> -> {1}", item.Children[new YamlScalarNode("name")], ex.ToString());
+                            Console.WriteLine("         Error -> Analyzing: <{0}> -> {1}", item.Children[new YamlScalarNode("name")], ex.ToString());
+                            Helpers.LogToFile("AnalyzeTools", "ERROR", "Analyzing: <" + item.Children[new YamlScalarNode("name")] + "> -> " + ex.ToString());
                         }
                     }
                 }
@@ -68,7 +70,8 @@ namespace OffensivePipeline
             if (!File.Exists(@"Tools\" + toolName + ".yml"))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("- Error: {0} tool not supported", toolName);
+                Console.WriteLine("         Error -> {0} tool not supported", toolName);
+                Helpers.LogToFile("AnalyzeTools", "ERROR", "<" + toolName + "> not supported");
                 Console.ResetColor();
                 return;
             }
@@ -90,23 +93,31 @@ namespace OffensivePipeline
                         item.Children[new YamlScalarNode("description")],
                         item.Children[new YamlScalarNode("gitLink")],
                         item.Children[new YamlScalarNode("solutionPath")]);
-
-                    toolPath = Build.DownloadRepository(item.Children[new YamlScalarNode("name")].ToString()
-                        , item.Children[new YamlScalarNode("gitLink")].ToString());
-                    outputFolder = Build.BuildTool(
-                            item.Children[new YamlScalarNode("solutionPath")].ToString(),
-                            item.Children[new YamlScalarNode("name")].ToString());
-                    //if (Helpers.ExecuteCommand("RMDIR \"" + toolPath + "\" /S /Q") != 0)
-                    //{
-                    //    Console.ForegroundColor = ConsoleColor.Red;
-                    //    Console.WriteLine("Error -> RMDIR: {0}", toolPath);
-                    //    Console.ResetColor();
-                    //}
-                    Build.Confuse(outputFolder);
-                    Helpers.CalculateMD5Files(outputFolder);
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine("     Output folder: {0}", outputFolder);
-                    Console.ResetColor();
+                    try
+                    {
+                        toolPath = Build.DownloadRepository(item.Children[new YamlScalarNode("name")].ToString()
+                            , item.Children[new YamlScalarNode("gitLink")].ToString());
+                        outputFolder = Build.BuildTool(
+                                item.Children[new YamlScalarNode("solutionPath")].ToString(),
+                                item.Children[new YamlScalarNode("name")].ToString());
+                        if (Helpers.ExecuteCommand("RMDIR \"" + toolPath + "\" /S /Q") != 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("         Error -> RMDIR: {0}", toolPath);
+                            Helpers.LogToFile("AnalyzeTools", "ERROR", "RMDIR: <" + toolPath + ">");
+                            Console.ResetColor();
+                        }
+                        Build.Confuse(outputFolder);
+                        Helpers.CalculateMD5Files(outputFolder);
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine("     Output folder: {0}", outputFolder);
+                        Console.ResetColor();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("         Error -> Analyzing: <{0}> -> {1}", item.Children[new YamlScalarNode("name")], ex.ToString());
+                        Helpers.LogToFile("AnalyzeTools", "ERROR", "Analyzing: <" + item.Children[new YamlScalarNode("name")] + "> -> " + ex.ToString());
+                    }
                 }
             }
 
@@ -150,8 +161,19 @@ namespace OffensivePipeline
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error deleting <" + Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx.zip" }) + "> - " + ex.ToString());
+                    Console.WriteLine("         Error ->  deleting <" + Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx.zip" }) + "> - " + ex.ToString());
+                    Helpers.LogToFile("CheckStart", "ERROR", "Deleting: <" + Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx.zip" }) + "> - " + ex.ToString());
                 }
+            }
+            string buildToolsPath = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\VsDevCmd.bat";
+            if (!File.Exists(buildToolsPath))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("         Error -> File not found: {0}", buildToolsPath);
+                Console.WriteLine("             Install -> Build Tools for Visual Studio 2019");
+                Helpers.LogToFile("CheckStart", "ERROR", "File not found: <" + buildToolsPath + ">");
+                Console.ResetColor();
+                System.Environment.Exit(1);
             }
         }
 
@@ -198,9 +220,9 @@ namespace OffensivePipeline
                                                                                     ooo
    
                                                                     @aetsu
+                                                                        v0.8.1
             ";
             Console.WriteLine(banner);
-
             var app = new CommandLineApplication();
             app.Name = "OffensivePipeline";
             app.HelpOption("-?|-h|--help");

@@ -6,7 +6,7 @@
     <Authors>Aetsu</Authors>
     <Company>https://github.com/aetsu</Company>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>0.8</Version>
+    <Version>0.8.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

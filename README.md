@@ -35,7 +35,7 @@ tool:
 
 
 ## Requirements for the release version (Visual Studio 2019 is not required)
-- Microsoft .NET Framework 3.5 Service Pack 1 (for some tools): https://www.microsoft.com/es-es/download/details.aspx?id=22
+- Microsoft .NET Framework 3.5 Service Pack 1 (for some tools): https://www.microsoft.com/en-us/download/details.aspx?id=22
 - Build Tools for Visual Studio 2019: https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16
     - Install .NET desktop build tools
     ![](img/lib01.png)
@@ -44,7 +44,7 @@ tool:
 
 
 ## Requirements for build
-- Net framework 3.5.1 (for some tools): https://www.microsoft.com/es-es/download/details.aspx?id=22
+- Net framework 3.5.1 (for some tools): https://www.microsoft.com/en-us/download/details.aspx?id=22
 - Visual Studio 2019 -> https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16
     - Install .NET desktop build tools
 

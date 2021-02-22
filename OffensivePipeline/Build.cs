@@ -51,7 +51,7 @@ namespace OffensivePipeline
                 if (Helpers.ExecuteCommand(@"Resources\nuget.exe restore " + solutionPath) != 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error -> nuget.exe: {0}", solutionPath);
+                    Console.WriteLine("         Error -> nuget.exe: {0}", solutionPath);
                     Console.ResetColor();
                 }
                 finalPath = Path.Combine(new string[] { outputDir, toolName + "_" + Helpers.GetRandomString() });

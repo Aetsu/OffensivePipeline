@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Security.Cryptography;
+using Microsoft.Win32;
 
 namespace OffensivePipeline
 {
@@ -27,13 +28,22 @@ namespace OffensivePipeline
                 string output = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();
                 exitCode = process.ExitCode;
+                if (!String.IsNullOrEmpty(output))
+                {
+                    LogToFile("ExecuteCommand", "INFO", output);
+                }
+                if (!String.IsNullOrEmpty(error))
+                {
+                    LogToFile("ExecuteCommand", "ERROR", error);
+                }
                 //Console.WriteLine("output>>" + (String.IsNullOrEmpty(output) ? "(none)" : output));
                 //Console.WriteLine("error>>" + (String.IsNullOrEmpty(error) ? "(none)" : error));
                 //Console.WriteLine("ExitCode: " + exitCode.ToString(), "ExecuteCommand");
                 process.Close();
             } catch (Exception ex)
             {
-                Console.WriteLine("Error executing command <" + command + "> - " + ex.ToString());
+                Console.WriteLine("         Error -> Executing command <" + command + "> - " + ex.ToString());
+                LogToFile("ExecuteCommand", "ERROR", command + "-> " + ex.ToString());
                 return 1;
             }
             
@@ -57,7 +67,8 @@ namespace OffensivePipeline
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error downloading <" + url + "> - " + ex.ToString());
+                Console.WriteLine("         Error -> Downloading <" + url + "> - " + ex.ToString());
+                LogToFile("DownloadResources", "ERROR", url + "-> " + ex.ToString());
                 return 1;
             }
             return 0;
@@ -72,7 +83,8 @@ namespace OffensivePipeline
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error unzipping <" + filePath + "> - " + ex.ToString());
+                Console.WriteLine("         Error -> Unzipping <" + filePath + "> - " + ex.ToString());
+                LogToFile("UnzipFile", "ERROR", filePath + "-> " + ex.ToString());
                 return 1;
             }
             return 0;
@@ -111,5 +123,15 @@ namespace OffensivePipeline
             }
             File.WriteAllLines(Path.Combine(new string[] { folder, "md5.txt" }), md5List);
         }
+
+        public static void LogToFile(string source, string logType, string messsage)
+        {
+            string FilePath = "log.txt";
+            DateTime localDate = DateTime.Now;
+            using var fileStream = new FileStream(FilePath, FileMode.Append);
+            using var writter = new StreamWriter(fileStream);
+            writter.WriteLine("{0} | {1} | {2} -- {3}", localDate.ToString(), logType, source, messsage);
+        }
+
     }
 }
