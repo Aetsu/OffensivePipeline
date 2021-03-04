@@ -107,9 +107,3 @@ tool:
 - winPEAS:
     - Description: Privilege Escalation Awesome Scripts SUITE
     - GitLink: https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite
-
-
-## TODO
-- [ ] Some tools have problems when they are obfuscated (ConfuserEx does not find the dependencies). In a future release of OffensivePipeline this will be patched.
-- [ ] Add more tools
-- [ ] Bugs?

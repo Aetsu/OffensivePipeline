@@ -1,6 +1,10 @@
 ﻿using LibGit2Sharp;
 using System;
 using System.IO;
+using Microsoft.Build.Construction;
+using System.Xml.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OffensivePipeline
 {
@@ -55,6 +59,7 @@ namespace OffensivePipeline
                     Console.ResetColor();
                 }
                 finalPath = Path.Combine(new string[] { outputDir, toolName + "_" + Helpers.GetRandomString() });
+
                 text = text.Replace("{{SOLUTION_PATH}}", solutionPath);
                 text = text.Replace("{{BUILD_OPTIONS}}", buildOptions);
                 text = text.Replace("{{OUTPUT_DIR}}", finalPath);
@@ -68,11 +73,41 @@ namespace OffensivePipeline
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("         Error -> msbuild.exe: {0}", solutionPath);
                     Console.ResetColor();
-                } else
+                }
+                else
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("         No errors!");
                     Console.ResetColor();
+                }
+
+                //Gets all references to the project to obfuscate it with confuser
+                SolutionFile s = SolutionFile.Parse(solutionPath);
+                foreach (ProjectInSolution p in s.ProjectsInOrder)
+                {
+                    if (File.Exists(p.AbsolutePath))
+                    {
+                        XNamespace msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
+                        XDocument projDefinition = XDocument.Load(p.AbsolutePath);
+                        IEnumerable<string> references = projDefinition
+                            .Element(msbuild + "Project")
+                            .Elements(msbuild + "ItemGroup")
+                            .Elements(msbuild + "Reference")
+                            .Elements(msbuild + "HintPath")
+                            .Select(refElem => refElem.Value);
+                        foreach (string reference in references)
+                        {
+                            string referenceFile = reference.Replace(@"..\", "");
+                            if (File.Exists(Path.Combine(new string[] { Path.GetDirectoryName(solutionPath), referenceFile })))
+                            {
+                                File.Copy(
+                                    Path.Combine(new string[] { Path.GetDirectoryName(solutionPath), referenceFile }),
+                                    Path.Combine(new string[] { finalPath, Path.GetFileName(referenceFile) }),
+                                    true);
+                            }
+                        }
+                    }
+
                 }
             }
             return finalPath;
@@ -98,7 +133,7 @@ namespace OffensivePipeline
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("         Error -> ConfuserEx: {0}", exe);
                     Console.ResetColor();
-                } 
+                }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
