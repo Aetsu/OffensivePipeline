@@ -1,0 +1,9 @@
+tool:
+  - name: SharpHose
+    description: SharpHose is a C# password spraying tool designed to be fast, safe, and usable over Cobalt Strike's execute-assembly. 
+    gitLink: https://github.com/ustayready/SharpHose
+    solutionPath: SharpHose\SharpHose.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

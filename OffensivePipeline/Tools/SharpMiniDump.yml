@@ -1,0 +1,9 @@
+tool:
+  - name: SharpMiniDump
+    description: Create a minidump of the LSASS process from memory (Windows 10 - Windows Server 2016). The entire process uses dynamic API calls, direct syscall and Native API unhooking to evade the AV / EDR detection.
+    gitLink: https://github.com/b4rtik/SharpMiniDump
+    solutionPath: SharpMiniDump\SharpMiniDump.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

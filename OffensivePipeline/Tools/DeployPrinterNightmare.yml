@@ -1,0 +1,9 @@
+tool:
+  - name: DeployPrinterNightmare
+    description: C# tool for installing a shared network printer abusing the PrinterNightmare bug to allow other network machines easy privesc!
+    gitLink: https://github.com/Flangvik/DeployPrinterNightmare
+    solutionPath: DeployPrinterNightmare\DeployPrinterNightmare\DeployPrinterNightmare.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

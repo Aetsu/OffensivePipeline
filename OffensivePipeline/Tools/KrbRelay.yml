@@ -1,0 +1,9 @@
+tool:
+  - name: KrbRelay
+    description: C# Framework for Kerberos relaying
+    gitLink: https://github.com/cube0x0/KrbRelay
+    solutionPath: KrbRelay\KrbRelay.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

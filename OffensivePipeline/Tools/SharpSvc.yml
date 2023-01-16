@@ -1,0 +1,9 @@
+tool:
+  - name: SharpSvc
+    description: SharpSvc is a simple code set to interact with the SC Manager API using the same DCERPC process as sc.exe, which open with TCP port 135 and is followed by the use of an ephemeral TCP port
+    gitLink: https://github.com/jnqpblc/SharpSvc
+    solutionPath: SharpSvc\SharpSvc.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

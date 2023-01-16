@@ -1,0 +1,9 @@
+tool:
+  - name: SharPersist
+    description: Windows persistence toolkit written in C#
+    gitLink: https://github.com/mandiant/SharPersist
+    solutionPath: SharPersist\SharPersist.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -3,3 +3,7 @@ tool:
     description: A native C# conversion of Kevin Robertsons Invoke-SMBExec powershell script
     gitLink: https://github.com/checkymander/Sharp-SMBExec
     solutionPath: Sharp-SMBExec\SharpInvoke-SMBExec.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

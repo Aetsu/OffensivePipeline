@@ -1,0 +1,9 @@
+tool:
+  - name: SharpBypassUAC
+    description: C# tool for UAC bypasses
+    gitLink: https://github.com/FatRodzianko/SharpBypassUAC
+    solutionPath: SharpBypassUAC\SharpBypassUAC.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

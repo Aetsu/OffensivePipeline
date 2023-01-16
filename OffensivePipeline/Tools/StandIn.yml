@@ -1,0 +1,9 @@
+tool:
+  - name: StandIn
+    description: StandIn is a small AD post-compromise toolkit
+    gitLink: https://github.com/FuzzySecurity/StandIn
+    solutionPath: StandIn\StandIn\StandIn.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

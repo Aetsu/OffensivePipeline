@@ -1,2 +1,2 @@
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\VsDevCmd.bat"
-msbuild.exe "{{SOLUTION_PATH}}" {{BUILD_OPTIONS}} /p:OutputPath="{{OUTPUT_DIR}}" /p:DebugSymbols=false /p:DebugType=None
+call "{{MSBUILD_PATH}}"
+msbuild.exe "{{SOLUTION_PATH}}" {{BUILD_OPTIONS}} /p:OutputPath="{{OUTPUT_DIR}}" /p:DebugSymbols=false /p:DebugType=None /p:AssemblyName="{{OUTPUT_FILENAME}}"

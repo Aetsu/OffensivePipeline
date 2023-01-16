@@ -1,0 +1,9 @@
+tool:
+  - name: SharpSniper
+    description: SharpSniper is a simple tool to find the IP address of these users so that you can target their box.
+    gitLink: https://github.com/HunnicCyber/SharpSniper
+    solutionPath: SharpSniper\SharpSniper.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

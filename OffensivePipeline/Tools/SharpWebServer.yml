@@ -1,0 +1,9 @@
+tool:
+  - name: SharpWebServer
+    description: Red Team oriented simple HTTP & WebDAV server written in C# with functionality to capture Net-NTLM hashes
+    gitLink: https://github.com/mgeeky/SharpWebServer
+    solutionPath: SharpWebServer\SharpWebServer.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

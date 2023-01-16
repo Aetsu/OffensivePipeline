@@ -1,0 +1,9 @@
+tool:
+  - name: SharpHandler
+    description: This project reuses open handles to lsass to parse or minidump lsass, therefore you don't need to use your own lsass handle to interact with it. (Dinvoke-version)
+    gitLink: https://github.com/jfmaes/SharpHandler
+    solutionPath: SharpHandler\Dinvoke-version\SharpHandler.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

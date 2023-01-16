@@ -1,0 +1,9 @@
+tool:
+  - name: Snaffler
+    description: Snaffler is a tool for pentesters and red teamers to help find delicious candy needles (creds mostly, but it's flexible) in a bunch of horrible boring haystacks (a massive Windows/AD environment).
+    gitLink: https://github.com/SnaffCon/Snaffler
+    solutionPath: Snaffler\Snaffler.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

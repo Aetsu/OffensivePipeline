@@ -1,0 +1,9 @@
+tool:
+  - name: SharpExec
+    description: SharpExec is an offensive security C# tool designed to aid with lateral movement.
+    gitLink: https://github.com/anthemtotheego/SharpExec
+    solutionPath: SharpExec\SharpExec.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

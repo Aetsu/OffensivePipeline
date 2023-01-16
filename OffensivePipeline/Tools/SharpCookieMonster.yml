@@ -1,0 +1,9 @@
+tool:
+  - name: SharpCookieMonster
+    description: This is a Sharp port of @defaultnamehere's cookie-crimes module - full credit for their awesome work!
+    gitLink: https://github.com/m0rv4i/SharpCookieMonster
+    solutionPath: SharpCookieMonster\SharpCookieMonster.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

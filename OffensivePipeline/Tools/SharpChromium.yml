@@ -3,3 +3,7 @@ tool:
     description: SharpChromium is a .NET 4.0+ CLR project to retrieve data from Google Chrome, Microsoft Edge, and Microsoft Edge Beta. Currently, it can extract
     gitLink: https://github.com/djhohnstein/SharpChromium
     solutionPath: SharpChromium\SharpChromium.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

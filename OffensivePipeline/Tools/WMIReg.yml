@@ -1,0 +1,9 @@
+tool:
+  - name: WMIReg
+    description: Whisker is a C# tool for taking over Active Directory user and computer accounts by manipulating their msDS-KeyCredentialLink attribute.
+    gitLink: https://github.com/airzero24/WMIReg
+    solutionPath: WMIReg\WMIReg.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

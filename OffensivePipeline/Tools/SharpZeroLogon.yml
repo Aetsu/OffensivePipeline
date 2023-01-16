@@ -1,0 +1,9 @@
+tool:
+  - name: SharpZeroLogon
+    description: An exploit for CVE-2020-1472, a.k.a. Zerologon. This tool exploits a cryptographic vulnerability in Netlogon to achieve authentication bypass.
+    gitLink: https://github.com/nccgroup/nccfsas
+    solutionPath: SharpZeroLogon\Tools\SharpZeroLogon\SharpZeroLogon.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

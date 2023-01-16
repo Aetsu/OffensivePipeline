@@ -1,0 +1,9 @@
+tool:
+  - name: SharpAppLocker
+    description: C# port of the Get-AppLockerPolicy PowerShell cmdlet with extended features.
+    gitLink: https://github.com/Flangvik/SharpAppLocker
+    solutionPath: SharpAppLocker\SharpAppLocker.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: SharpPrinter
+    description: Printer is a modified and console version of ListNetworks
+    gitLink: https://github.com/rvrsh3ll/SharpPrinter
+    solutionPath: SharpPrinter\SharpPrinter.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

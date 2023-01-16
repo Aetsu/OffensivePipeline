@@ -1,0 +1,9 @@
+tool:
+  - name: PurpleSharp
+    description: PurpleSharp is an open source adversary simulation tool written in C# that executes adversary techniques within Windows Active Directory environments
+    gitLink: https://github.com/mvelazc0/PurpleSharp
+    solutionPath: PurpleSharp\PurpleSharp.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

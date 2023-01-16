@@ -1,0 +1,9 @@
+tool:
+  - name: TruffleSnout
+    description: Iterative AD discovery toolkit for offensive operators
+    gitLink: https://github.com/dsnezhkov/TruffleSnout
+    solutionPath: TruffleSnout\TruffleSnout.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: SauronEye
+    description: SauronEye is a search tool built to aid red teams in finding files containing specific keywords.
+    gitLink: https://github.com/vivami/SauronEye
+    solutionPath: SauronEye\src\SauronEye.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

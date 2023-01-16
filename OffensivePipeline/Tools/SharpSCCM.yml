@@ -1,0 +1,9 @@
+tool:
+  - name: SharpSCCM
+    description: SharpSCCM is a post-exploitation tool designed to leverage Microsoft Endpoint Configuration Manager (a.k.a. ConfigMgr, formerly SCCM) for lateral movement and credential gathering without requiring access to the SCCM administration console GUI.
+    gitLink: https://github.com/Mayyhem/SharpSCCM
+    solutionPath: SharpSCCM\SharpSCCM.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

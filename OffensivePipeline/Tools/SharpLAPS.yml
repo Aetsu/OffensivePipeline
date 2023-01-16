@@ -1,0 +1,9 @@
+tool:
+  - name: SharpLAPS
+    description: This executable is made to be executed within Cobalt Strike session using execute-assembly. It will retrieve the LAPS password from the Active Directory.
+    gitLink: https://github.com/swisskyrepo/SharpLAPS
+    solutionPath: SharpLAPS\SharpLAPS.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -3,3 +3,7 @@ tool:
     description: C# Rewrite of the BloodHound Ingestor
     gitLink: https://github.com/BloodHoundAD/SharpHound3
     solutionPath: SharpHound3\SharpHound3.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

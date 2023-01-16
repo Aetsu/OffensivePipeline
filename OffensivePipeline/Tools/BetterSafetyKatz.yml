@@ -1,0 +1,9 @@
+tool:
+  - name: BetterSafetyKatz
+    description: This modified fork of SafetyKatz dynamically fetches the latest pre-compiled release of Mimikatz directly from the gentilkiwi GitHub repo, runtime patching on detected signatures and uses SharpSploit DInvoke to get it into memory.
+    gitLink: https://github.com/Flangvik/BetterSafetyKatz
+    solutionPath: BetterSafetyKatz\BetterSafetyKatz.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx
+    authUser:
+    authToken:  

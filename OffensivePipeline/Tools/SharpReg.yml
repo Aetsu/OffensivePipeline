@@ -1,0 +1,9 @@
+tool:
+  - name: SharpReg
+    description: SharpReg is a simple code set to interact with the Remote Registry service API using the same SMB process as reg.exe, which uses TCP port 445
+    gitLink: https://github.com/jnqpblc/SharpReg
+    solutionPath: SharpReg\SharpReg.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: SweetPotato
+    description: A collection of various native Windows privilege escalation techniques from service accounts to SYSTEM
+    gitLink: https://github.com/CCob/SweetPotato
+    solutionPath: SweetPotato\SweetPotato.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

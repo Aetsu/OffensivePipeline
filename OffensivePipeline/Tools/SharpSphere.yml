@@ -1,0 +1,9 @@
+tool:
+  - name: SharpSphere
+    description: SharpSphere gives red teamers the ability to easily interact with the guest operating systems of virtual machines managed by vCenter
+    gitLink: https://github.com/JamesCooteUK/SharpSphere
+    solutionPath: SharpSphere\SharpSphere.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

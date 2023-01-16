@@ -1,0 +1,9 @@
+tool:
+  - name: EDD
+    description: Enumerate Domain Data is designed to be similar to PowerView but in .NET. PowerView is essentially the ultimate domain enumeration tool, and we wanted a .NET implementation that we worked on ourselves. This tool was largely put together by viewing implementations of different functionality across a wide range of existing projects and combining them into EDD.
+    gitLink: https://github.com/FortyNorthSecurity/EDD
+    solutionPath: EDD\EDD.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

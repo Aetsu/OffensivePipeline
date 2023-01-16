@@ -1,0 +1,9 @@
+tool:
+  - name: SharpCloud
+    description: SharpCloud is a simple C# utility for checking for the existence of credential files related to Amazon Web Services, Microsoft Azure, and Google Compute.
+    gitLink: https://github.com/chrismaddalena/SharpCloud
+    solutionPath: SharpCloud\SharpCloud.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

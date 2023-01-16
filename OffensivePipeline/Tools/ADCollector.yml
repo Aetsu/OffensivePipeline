@@ -1,0 +1,9 @@
+tool:
+  - name: ADCollector
+    description: ADCollector is a lightweight tool that enumerates the Active Directory environment to identify possible attack vectors. 
+    gitLink: https://github.com/dev-2null/ADCollector
+    solutionPath: ADCollector\ADCollector3.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

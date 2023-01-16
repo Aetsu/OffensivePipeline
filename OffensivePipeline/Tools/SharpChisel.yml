@@ -1,0 +1,9 @@
+tool:
+  - name: SharpChisel
+    description: C# Wrapper of Chisel from https://github.com/jpillora/chisel
+    gitLink: https://github.com/shantanu561993/SharpChisel
+    solutionPath: SharpChisel\SharpChisel.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

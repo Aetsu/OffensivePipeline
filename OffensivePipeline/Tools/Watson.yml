@@ -3,3 +3,7 @@ tool:
     description: Watson is a .NET tool designed to enumerate missing KBs and suggest exploits for Privilege Escalation vulnerabilities.
     gitLink: https://github.com/rasta-mouse/Watson
     solutionPath: Watson\Watson.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

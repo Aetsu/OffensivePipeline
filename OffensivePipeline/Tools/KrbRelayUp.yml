@@ -1,0 +1,9 @@
+tool:
+  - name: KrbRelayUp
+    description: Simple wrapper around some of the features of Rubeus and KrbRelay
+    gitLink: https://github.com/Dec0ne/KrbRelayUp
+    solutionPath: KrbRelayUp\KrbRelayUp.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

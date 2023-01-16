@@ -1,0 +1,9 @@
+tool:
+  - name: SharpScribbles
+    description: Extracts data from the Windows Sticky Notes database. Works on Windows 10 Build 1607 and higher. This
+    gitLink: https://github.com/V1V1/SharpScribbles
+    solutionPath: SharpScribbles\StickyNotesExtract\StickyNotesExtract.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,210 +1,188 @@
-﻿using Microsoft.Extensions.CommandLineUtils;
-using System;
-using System.IO;
-using YamlDotNet.RepresentationModel;
+﻿using McMaster.Extensions.CommandLineUtils;
+using System.Reflection;
+using OffensivePipeline.Modules;
+using System.Configuration;
 
 namespace OffensivePipeline
 {
-    class Program
+    public class Summary
     {
-        static void AnalyzeTools()
+        public ToolConfig tool;
+        public List<ModuleOutput> lModuleOutput;
+        public bool status;
+    }
+
+    internal class Program
         {
-            string[] toolList = Directory.GetFiles("Tools", "*.yml");
-            foreach (string tool in toolList)
+        static void listTools()
+        {
+            List<ToolConfig> lTools = YmlHelpers.ReadYmls();
+            int index = 1;
+            foreach (var tool in lTools)
             {
-                string outputFolder = string.Empty;
-                string toolPath = string.Empty;
-                string text = File.ReadAllText(tool);
-                var stringReader = new StringReader(text);
-                var yaml = new YamlStream();
-                yaml.Load(stringReader);
-                var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+                LogHelpers.PrintYellow($"[{index}/{lTools.Count}] {tool.name} - <{tool.language}>:");
+                Console.WriteLine($"\t> Description: {tool.description}");
+                Console.WriteLine($"\t> Link: {tool.gitLink}");
+                LogHelpers.PrintBlue($"\t> Plugins: {string.Join(", ", tool.plugins)}");
+                index++;
+            }
+        }
 
-                foreach (var entry in mapping.Children)
+        static void cleanTools()
+        {
+            string message = "\t[+] Cleaning...";
+            LogHelpers.PrintBlue(message);
+            LogHelpers.LogToFile("cleanTools", "INFO", message);
+            if (Directory.Exists(Conf.gitToolsPath))
+            {
+                LogHelpers.PrintGray($"\t\t> Folder {Conf.gitToolsPath}");
+                Helpers.DeleteReadOnlyDirectory(Conf.gitToolsPath);
+            }
+            if (Directory.Exists(Conf.outputPath))
+            {
+                LogHelpers.PrintGray($"\t\t> Folder {Conf.outputPath}");
+                Helpers.DeleteReadOnlyDirectory(Conf.outputPath);
+            }
+            if (File.Exists(Conf.logFile))
+            {
+                LogHelpers.PrintGray($"\t\t> Log file {Conf.logFile}");
+                File.Delete(Conf.logFile);
+            }
+            Directory.CreateDirectory(Conf.gitToolsPath);
+            Directory.CreateDirectory(Conf.outputPath);
+        }
+
+        public static void LaunchPipeline(string toolName=null)
+        {
+            List<ToolConfig> lTools = new List<ToolConfig>();
+            if (toolName != null)
+            {
+                lTools = YmlHelpers.ReadYmls(toolName);
+            }
+            else
+            {
+                lTools = YmlHelpers.ReadYmls();
+            }
+            List<Summary> lSummary = new List<Summary>();
+            foreach (var tool in lTools)
+            {
+                Summary summary = LoadTool(tool);
+                if (!summary.status)
                 {
-                    var items = (YamlSequenceNode)mapping.Children[new YamlScalarNode("tool")];
-                    foreach (YamlMappingNode item in items)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("\n[+] Name: {0}", item.Children[new YamlScalarNode("name")]);
-                        Console.ResetColor();
-                        Console.WriteLine("     - Description: {0}\n     - Git link: {1}\n     - Solution file: {2}\n",
-                            item.Children[new YamlScalarNode("description")],
-                            item.Children[new YamlScalarNode("gitLink")],
-                            item.Children[new YamlScalarNode("solutionPath")]);
+                    string message = $"Error processing {tool.name}";
+                    LogHelpers.PrintError(message);
+                    LogHelpers.LogToFile("LaunchPipeline", "ERROR", message);
+                }
+                lSummary.Add(summary);
+            }
 
+            ShowSummary(lSummary);
+        }
+        private static object LoadModule(string namespaceName, ToolConfig tool, ModuleOutput moduleOutput)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var type = assembly.GetTypes()
+            .First(t => t.FullName == $"OffensivePipeline.Modules.{namespaceName}");
+            if (type != null)
+            {
+                return Activator.CreateInstance(type, tool, moduleOutput);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static void ShowSummary(List<Summary> lSummary)
+        {
+            Console.WriteLine("\n\n-----------------------------------------------------------------");
+            LogHelpers.PrintMagenta("\t\tSUMMARY\n");
+            foreach(Summary s in lSummary)
+            {
+                Console.WriteLine($" - {s.tool.name}");
+                foreach(ModuleOutput m in s.lModuleOutput)
+                {
+                    if (m.Status)
+                    {
+                        LogHelpers.PrintOk($"\t - {m.Name}: OK");
+                    }
+                    else
+                    {
+                        LogHelpers.PrintError($"\t - {m.Name}: ERROR");
+                    }
+                }
+            }
+            Console.WriteLine("\n-----------------------------------------------------------------");
+        }
+
+        private static Summary LoadTool(ToolConfig tool)
+        {
+            Summary summary = new Summary();
+            summary.lModuleOutput = new List<ModuleOutput>();
+            summary.tool = tool;
+            summary.status = true;
+            ModuleOutput moduleOutput = new ModuleOutput();
+            LogHelpers.PrintMagenta($"\n[+] Loading tool: {tool.name}");
+            Uri uriResult;
+            bool isUrl = Uri.TryCreate(tool.gitLink, UriKind.Absolute, out uriResult)
+                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            if (isUrl) //is remote
+            {
+                moduleOutput.Status = GitHelpers.DownloadRepository(tool);
+            }
+            else //is local
+            {
+                moduleOutput.Status = GitHelpers.CloneLocalTool(tool);
+            }
+            if (moduleOutput.Status)
+            {
+                Helpers.CheckFolder(Conf.outputPath);
+                string outputDir = Path.Combine(Directory.GetCurrentDirectory(), Conf.outputPath);
+                moduleOutput.OutputPath = Path.Combine(outputDir, $"{tool.name}_{Helpers.GetRandomString()}");
+                string outputAux = moduleOutput.OutputPath;
+                foreach (string module in tool.plugins)
+                {
+                    moduleOutput.Name = module;
+                    if (moduleOutput.Status)
+                    {
                         try
                         {
-                            toolPath = Build.DownloadRepository(item.Children[new YamlScalarNode("name")].ToString()
-                            , item.Children[new YamlScalarNode("gitLink")].ToString());
-                            outputFolder = Build.BuildTool(
-                                item.Children[new YamlScalarNode("solutionPath")].ToString(),
-                                item.Children[new YamlScalarNode("name")].ToString());
-                            if (Helpers.ExecuteCommand("RMDIR \"" + toolPath + "\" /S /Q") != 0)
+                            iModule instancedModule  = (iModule)LoadModule(module, tool, moduleOutput);
+                            Console.WriteLine($"\n    [+] Load {module} module");
+                            moduleOutput = instancedModule.CheckStart();
+                            if (moduleOutput.Status)
                             {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("         Error -> RMDIR: {0}", toolPath);
-                                Helpers.LogToFile("AnalyzeTools", "ERROR", "RMDIR: <" + toolPath + ">");
-                                Console.ResetColor();
+                                moduleOutput = instancedModule.Run();
                             }
-                            Build.Confuse(outputFolder);
-                            Helpers.CalculateMD5Files(outputFolder);
-                            Console.ForegroundColor = ConsoleColor.Magenta;
-                            Console.WriteLine("     Output folder: {0}", outputFolder);
-                            Console.ResetColor();
-                        } 
-                        catch (Exception ex)
+                        }
+                        catch (Exception e)
                         {
-                            Console.WriteLine("         Error -> Analyzing: <{0}> -> {1}", item.Children[new YamlScalarNode("name")], ex.ToString());
-                            Helpers.LogToFile("AnalyzeTools", "ERROR", "Analyzing: <" + item.Children[new YamlScalarNode("name")] + "> -> " + ex.ToString());
+                            string message = $"LoadTool - Error in module: {module} - {e}";
+                            LogHelpers.PrintError(message);
+                            LogHelpers.LogToFile("Main - LoadTool", "ERROR", message);
                         }
                     }
+                    Console.WriteLine();
+                    ModuleOutput moduleOutputAux = new ModuleOutput();
+                    moduleOutputAux.Name = moduleOutput.Name;
+                    moduleOutputAux.Status = moduleOutput.Status;
+                    moduleOutputAux.OutputPath = moduleOutput.OutputPath;
+                    summary.status = moduleOutputAux.Status;
+                    summary.lModuleOutput.Add(moduleOutputAux);
+                }
+                if (Directory.Exists(outputAux))
+                {
+                    Console.WriteLine($"\n    [+] Generating Sha256 hashes");
+                    Helpers.CalculateSha256Files(outputAux);
+                    string str = $"\t\tOutput file: {outputAux}";
+                    LogHelpers.PrintGray(str);
+                    LogHelpers.LogToFile($"Main - LoadTool", "INFO", str);
                 }
             }
+            return summary;
         }
 
-        static void AnalyzeTools(string toolName)
-        {
-            string outputFolder = string.Empty;
-            string toolPath = string.Empty;
-            if (!File.Exists(@"Tools\" + toolName + ".yml"))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("         Error -> {0} tool not supported", toolName);
-                Helpers.LogToFile("AnalyzeTools", "ERROR", "<" + toolName + "> not supported");
-                Console.ResetColor();
-                return;
-            }
-            string text = File.ReadAllText(@"Tools\" + toolName + ".yml");
-            var stringReader = new StringReader(text);
-            var yaml = new YamlStream();
-            yaml.Load(stringReader);
-            var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
-
-            foreach (var entry in mapping.Children)
-            {
-                var items = (YamlSequenceNode)mapping.Children[new YamlScalarNode("tool")];
-                foreach (YamlMappingNode item in items)
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("\n[+] Name: {0}", item.Children[new YamlScalarNode("name")]);
-                    Console.ResetColor();
-                    Console.WriteLine("     - Description: {0}\n     - Git link: {1}\n     - Solution file: {2}\n",
-                        item.Children[new YamlScalarNode("description")],
-                        item.Children[new YamlScalarNode("gitLink")],
-                        item.Children[new YamlScalarNode("solutionPath")]);
-                    try
-                    {
-                        toolPath = Build.DownloadRepository(item.Children[new YamlScalarNode("name")].ToString()
-                            , item.Children[new YamlScalarNode("gitLink")].ToString());
-                        outputFolder = Build.BuildTool(
-                                item.Children[new YamlScalarNode("solutionPath")].ToString(),
-                                item.Children[new YamlScalarNode("name")].ToString());
-                        if (Helpers.ExecuteCommand("RMDIR \"" + toolPath + "\" /S /Q") != 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("         Error -> RMDIR: {0}", toolPath);
-                            Helpers.LogToFile("AnalyzeTools", "ERROR", "RMDIR: <" + toolPath + ">");
-                            Console.ResetColor();
-                        }
-                        Build.Confuse(outputFolder);
-                        Helpers.CalculateMD5Files(outputFolder);
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.WriteLine("     Output folder: {0}", outputFolder);
-                        Console.ResetColor();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("         Error -> Analyzing: <{0}> -> {1}", item.Children[new YamlScalarNode("name")], ex.ToString());
-                        Helpers.LogToFile("AnalyzeTools", "ERROR", "Analyzing: <" + item.Children[new YamlScalarNode("name")] + "> -> " + ex.ToString());
-                    }
-                }
-            }
-
-        }
-        static void CheckStart()
-        {
-            int error = 0;
-            if (!File.Exists(Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "nuget.exe" })))
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("   [*] Downloading nuget.exe...");
-                Console.ResetColor();
-                //Download nuget.exe
-                error = Helpers.DownloadResources(@"https://dist.nuget.org/win-x86-commandline/latest/nuget.exe", "nuget.exe", "Resources");
-                if (error != 0)
-                {
-                    System.Environment.Exit(1);
-                }
-            }
-            if (!Directory.Exists(Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx" })))
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("   [*] Downloading ConfuserEx...");
-                Console.ResetColor();
-                //Download ConfuserEx
-                error = Helpers.DownloadResources(@"https://github.com/mkaring/ConfuserEx/releases/download/v1.4.1/ConfuserEx-CLI.zip", "ConfuserEx.zip", "Resources");
-                if (error != 0)
-                {
-                    System.Environment.Exit(1);
-                }
-                error = Helpers.UnzipFile(
-                    Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx.zip" }),
-                    Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx" }));
-                if (error != 0)
-                {
-                    System.Environment.Exit(1);
-                }
-                try
-                {
-                    File.Delete(Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx.zip" }));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("         Error ->  deleting <" + Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx.zip" }) + "> - " + ex.ToString());
-                    Helpers.LogToFile("CheckStart", "ERROR", "Deleting: <" + Path.Combine(new string[] { Directory.GetCurrentDirectory(), "Resources", "ConfuserEx.zip" }) + "> - " + ex.ToString());
-                }
-            }
-            string buildToolsPath = @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\VsDevCmd.bat";
-            if (!File.Exists(buildToolsPath))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("         Error -> File not found: {0}", buildToolsPath);
-                Console.WriteLine("             Install -> Build Tools for Visual Studio 2019");
-                Helpers.LogToFile("CheckStart", "ERROR", "File not found: <" + buildToolsPath + ">");
-                Console.ResetColor();
-                System.Environment.Exit(1);
-            }
-        }
-
-        static void ListTools()
-        {
-            string[] toolList = Directory.GetFiles("Tools", "*.yml");
-            foreach (string tool in toolList)
-            {
-                string text = File.ReadAllText(tool);
-                var stringReader = new StringReader(text);
-                var yaml = new YamlStream();
-                yaml.Load(stringReader);
-                var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
-                foreach (var entry in mapping.Children)
-                {
-                    var items = (YamlSequenceNode)mapping.Children[new YamlScalarNode("tool")];
-                    foreach (YamlMappingNode item in items)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("\n   [+] Name: {0}", item.Children[new YamlScalarNode("name")]);
-                        Console.ResetColor();
-                        Console.WriteLine("     - Description: {0}\n     - Git: {1}",
-                            item.Children[new YamlScalarNode("description")],
-                            item.Children[new YamlScalarNode("gitLink")]);
-                    }
-                }
-            }
-            Console.WriteLine();
-        }
-
-        static void Main(string[] args)
+        public static void ShowBanner()
         {
             string banner = @"
                                                                                                    ooo
@@ -220,12 +198,26 @@ namespace OffensivePipeline
                                                                                     ooo
    
                                                                     @aetsu
-                                                                        v0.8.1
-            ";
+            " + $"\t\t\t\t\t\t\t\t\tv{ConfigurationManager.AppSettings["Version"]}\n";
             Console.WriteLine(banner);
+        }
+
+
+        static void Main(string[] args)
+        {
+            ShowBanner();
             var app = new CommandLineApplication();
             app.Name = "OffensivePipeline";
             app.HelpOption("-?|-h|--help");
+            app.ExtendedHelpText = @"
+Examples:
+ - List all tools:
+    OffensivePipeline.exe list
+ - Load seatbelt tool:
+    OffensivePipeline.exe t seatbelt
+ - Load all tools:
+    OffensivePipeline.exe all
+";
 
             app.OnExecute(() =>
             {
@@ -235,40 +227,51 @@ namespace OffensivePipeline
 
             app.Command("list", (command) =>
             {
-                command.Description = "List all supported tools";
+                command.Description = "List all tools";
                 command.HelpOption("-?|-h|--help");
                 command.OnExecute(() =>
                 {
-                    ListTools();
+                    listTools();
+                    Console.WriteLine();
                     return 0;
                 });
             });
 
             app.Command("all", (command) =>
             {
-                command.Description = "Build and obfuscate all tools";
+                command.Description = "Load all tools";
                 command.HelpOption("-?|-h|--help");
                 command.OnExecute(() =>
                 {
-                    CheckStart();
-                    AnalyzeTools();
+                    LaunchPipeline();
+                    Console.WriteLine();
                     return 0;
                 });
             });
 
             app.Command("t", (command) =>
             {
-                command.Description = "Build and obfuscate the specified tool";
+                command.Description = "Load the specified tool";
                 command.HelpOption("-?|-h|--help");
                 var toolArgument = command.Argument("[tool]", "Tool to build.");
                 command.OnExecute(() =>
                 {
                     if (toolArgument.Value != null)
                     {
-                        CheckStart();
-                        AnalyzeTools(toolArgument.Value);
+                        LaunchPipeline(toolArgument.Value);
                     }
-
+                    Console.WriteLine();
+                    return 0;
+                });
+            });
+            app.Command("clean", (command) =>
+            {
+                command.Description = "Clean all tools";
+                command.HelpOption("-?|-h|--help");
+                command.OnExecute(() =>
+                {
+                    cleanTools();
+                    Console.WriteLine();
                     return 0;
                 });
             });

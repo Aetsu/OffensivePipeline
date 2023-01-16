@@ -1,0 +1,9 @@
+tool:
+  - name: SharpWifiGrabber
+    description: Retrieves in clear-text the Wi-Fi Passwords from all WLAN Profiles saved on a workstation
+    gitLink: https://github.com/r3nhat/SharpWifiGrabber
+    solutionPath: SharpWifiGrabber\SharpWifiGrabber.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

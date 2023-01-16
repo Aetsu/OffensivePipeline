@@ -1,0 +1,9 @@
+tool:
+  - name: ForgeCert
+    description: C# tool to find vulnerabilities in AD Group Policy, but do it better than Grouper2 did.
+    gitLink: https://github.com/GhostPack/ForgeCert
+    solutionPath: ForgeCert\ForgeCert.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

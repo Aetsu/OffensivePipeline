@@ -1,0 +1,9 @@
+tool:
+  - name: SharpDump
+    description: SharpDump is a C# port of PowerSploit's Out-Minidump.ps1 functionality
+    gitLink: https://github.com/GhostPack/SharpDump
+    solutionPath: SharpDump\SharpDump.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

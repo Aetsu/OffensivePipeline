@@ -1,0 +1,9 @@
+tool:
+  - name: SharpEDRChecker
+    description: Checks running processes, process metadata, Dlls loaded into your current process and each DLLs metadata, common install directories, installed services and each service binaries metadata, installed drivers and each drivers metadata, all for the presence of known defensive products such as AV's, EDR's and logging tools.
+    gitLink: https://github.com/PwnDexter/SharpEDRChecker
+    solutionPath: SharpEDRChecker\SharpEDRChecker.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

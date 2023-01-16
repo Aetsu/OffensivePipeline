@@ -1,0 +1,9 @@
+tool:
+  - name: ADSearch
+    description: A tool written for cobalt-strike's execute-assembly command that allows for more efficent querying of AD.
+    gitLink: https://github.com/tomcarver16/ADSearch
+    solutionPath: ADSearch\ADSearch.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: SafetyKatz
+    description: SafetyKatz is a combination of slightly modified version of @gentilkiwi's Mimikatz project and @subtee's .NET PE Loader.
+    gitLink: https://github.com/GhostPack/SafetyKatz
+    solutionPath: SafetyKatz\SafetyKatz.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

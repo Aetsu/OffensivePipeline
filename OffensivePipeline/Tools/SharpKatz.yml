@@ -1,0 +1,9 @@
+tool:
+  - name: SharpKatz
+    description: Porting of mimikatz sekurlsa::logonpasswords, sekurlsa::ekeys and lsadump::dcsync commands
+    gitLink: https://github.com/b4rtik/SharpKatz
+    solutionPath: SharpKatz\SharpKatz.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

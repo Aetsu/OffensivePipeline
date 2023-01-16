@@ -1,0 +1,9 @@
+tool:
+  - name: SharpSecDump
+    description: .Net port of the remote SAM + LSA Secrets dumping functionality of impacket's secretsdump.py
+    gitLink: https://github.com/G0ldenGunSec/SharpSecDump
+    solutionPath: SharpSecDump\SharpSecDump.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

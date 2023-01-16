@@ -1,0 +1,9 @@
+tool:
+  - name: SharpCrashEventLog
+    description: Crashes the Windows eventlog service locally or remotely using OpenEventLogA/ElfClearEventLogFileW.
+    gitLink: https://github.com/slyd0g/SharpCrashEventLog
+    solutionPath: SharpCrashEventLog\SharpCrashEventLog.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

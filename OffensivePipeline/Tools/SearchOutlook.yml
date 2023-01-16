@@ -1,0 +1,9 @@
+tool:
+  - name: SearchOutlook
+    description: A C# tool to search through a running instance of Outlook for keywords
+    gitLink: https://github.com/RedLectroid/SearchOutlook
+    solutionPath: SearchOutlook\SearchOutlook.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

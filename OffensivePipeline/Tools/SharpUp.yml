@@ -3,3 +3,7 @@ tool:
     description: SharpUp is a C# port of various PowerUp functionality
     gitLink: https://github.com/GhostPack/SharpUp
     solutionPath: SharpUp\SharpUp.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

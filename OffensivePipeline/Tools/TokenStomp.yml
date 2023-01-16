@@ -1,0 +1,9 @@
+tool:
+  - name: TokenStomp
+    description: C# POC for the token privilege removal flaw reported
+    gitLink: https://github.com/MartinIngesen/TokenStomp
+    solutionPath: TokenStomp\TokenStomp.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

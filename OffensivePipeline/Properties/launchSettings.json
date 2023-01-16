@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OffensivePipeline": {
+      "commandName": "Project",
+      "commandLineArgs": "t rubeus"
+    }
+  }
+}

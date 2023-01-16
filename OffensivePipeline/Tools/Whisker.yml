@@ -1,0 +1,9 @@
+tool:
+  - name: Whisker
+    description: Whisker is a C# tool for taking over Active Directory user and computer accounts by manipulating their msDS-KeyCredentialLink attribute, effectively adding "Shadow Credentials" to the target account.
+    gitLink: https://github.com/eladshamir/Whisker
+    solutionPath: Whisker\Whisker.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

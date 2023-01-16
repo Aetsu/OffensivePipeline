@@ -1,0 +1,9 @@
+tool:
+  - name: Certify
+    description: Certify is a C# tool to enumerate and abuse misconfigurations in Active Directory Certificate Services (AD CS).
+    gitLink: https://github.com/GhostPack/Certify
+    solutionPath: Certify\Certify.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

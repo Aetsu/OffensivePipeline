@@ -3,3 +3,7 @@ tool:
     description: Modified version of Matterpreter's DefenderCheck
     gitLink: https://github.com/rasta-mouse/ThreatCheck
     solutionPath: ThreatCheck\ThreatCheck\ThreatCheck.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

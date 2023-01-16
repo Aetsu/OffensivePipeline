@@ -1,0 +1,9 @@
+tool:
+  - name: Shhmon
+    description: While Sysmon's driver can be renamed at installation, it is always loaded at altitude 385201. The objective of this tool is to challenge the assumption that our defensive tools are always collecting events.
+    gitLink: https://github.com/matterpreter/Shhmon
+    solutionPath: Shhmon\Shhmon.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: SqlClient
+    description: C# .NET mssql client for accessing database data through beacon.
+    gitLink: https://github.com/FortyNorthSecurity/SqlClient
+    solutionPath: SqlClient\SqlClient.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

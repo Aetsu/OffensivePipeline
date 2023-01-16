@@ -1,0 +1,9 @@
+tool:
+  - name: SharpSQLPwn
+    description: C# tool to identify and exploit weaknesses with MSSQL instances in Active Directory environments
+    gitLink: https://github.com/lefayjey/SharpSQLPwn
+    solutionPath: SharpSQLPwn\SharpSQLPwn.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: SharpTask
+    description: SharpTask is a simple code set to interact with the Task Scheduler service API using the same DCERPC process as schtasks.exe, which open with TCP port 135 and is followed by the use of an ephemeral TCP port.
+    gitLink: https://github.com/jnqpblc/SharpTask
+    solutionPath: SharpTask\SharpTask.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: SharpSearch
+    description: Project to quickly filter through a file share for targeted files for desired information.
+    gitLink: https://github.com/djhohnstein/SharpSearch
+    solutionPath: SharpSearch\SharpSearch.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

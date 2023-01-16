@@ -1,0 +1,9 @@
+tool:
+  - name: SharpShares
+    description: Quick and dirty binary to list network share information from all machines in the current domain and if they're readable.
+    gitLink: https://github.com/djhohnstein/SharpShares
+    solutionPath: SharpShares\SharpShares.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

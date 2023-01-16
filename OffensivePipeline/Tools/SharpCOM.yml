@@ -1,0 +1,9 @@
+tool:
+  - name: SharpCOM
+    description: SharpCOM is a c# port of Invoke-DCOM
+    gitLink: https://github.com/rvrsh3ll/SharpCOM
+    solutionPath: SharpCOM\SharpCOM.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

@@ -1,0 +1,9 @@
+tool:
+  - name: Group3r
+    description: Rubeus is a C# toolset for raw Kerberos interaction and abuses
+    gitLink: https://github.com/Group3r/Group3r
+    solutionPath: Group3r\Group3r.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

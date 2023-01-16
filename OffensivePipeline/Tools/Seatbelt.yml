@@ -3,3 +3,7 @@ tool:
     description: Seatbelt is a C# project that performs a number of security oriented host-survey "safety checks" relevant from both offensive and defensive security perspectives.
     gitLink: https://github.com/GhostPack/Seatbelt
     solutionPath: Seatbelt\Seatbelt.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

@@ -1,0 +1,9 @@
+tool:
+  - name: ADFSDump
+    description: A C# tool to dump all sorts of goodies from AD FS.
+    gitLink: https://github.com/mandiant/ADFSDump
+    solutionPath: ADFSDump\ADFSDump.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

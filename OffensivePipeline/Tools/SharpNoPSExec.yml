@@ -1,0 +1,9 @@
+tool:
+  - name: SharpNoPSExec
+    description: File less command execution for lateral movement.
+    gitLink: https://github.com/juliourena/SharpNoPSExec
+    solutionPath: SharpNoPSExec\SharpNoPSExec.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

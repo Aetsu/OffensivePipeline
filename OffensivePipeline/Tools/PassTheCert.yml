@@ -1,0 +1,9 @@
+tool:
+  - name: PassTheCert
+    description: A small Proof-of-Concept tool that allows authenticating against an LDAP/S server with a certificate to perform different attack actions
+    gitLink: https://github.com/AlmondOffSec/PassTheCert
+    solutionPath: PassTheCert\C#\PassTheCert.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

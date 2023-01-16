@@ -1,0 +1,9 @@
+tool:
+  - name: SharpMapExec
+    description: Sharpen version of CrackMapExec
+    gitLink: https://github.com/cube0x0/SharpMapExec
+    solutionPath: SharpMapExec\SharpMapExec.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

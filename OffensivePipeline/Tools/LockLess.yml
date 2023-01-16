@@ -1,0 +1,9 @@
+tool:
+  - name: LockLess
+    description: LockLess is a C# tool that allows for the enumeration of open file handles and the copying of locked files.
+    gitLink: https://github.com/GhostPack/LockLess
+    solutionPath: LockLess\LockLess.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

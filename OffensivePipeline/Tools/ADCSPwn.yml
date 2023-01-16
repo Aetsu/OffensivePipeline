@@ -1,0 +1,9 @@
+tool:
+  - name: ADCSPwn
+    description: A tool to escalate privileges in an active directory network by coercing authenticate from machine accounts (Petitpotam) and relaying to the certificate service.
+    gitLink: https://github.com/bats3c/ADCSPwn
+    solutionPath: ADCSPwn\ADCSPwn\ADCSPwn.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

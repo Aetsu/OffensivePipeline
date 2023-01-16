@@ -1,0 +1,9 @@
+tool:
+  - name: SharpNamedPipePTH
+    description: This project is a C# tool to use Pass-the-Hash for authentication on a local Named Pipe for user Impersonation. You need a local administrator or SEImpersonate rights to use this.
+    gitLink: https://github.com/S3cur3Th1sSh1t/SharpNamedPipePTH
+    solutionPath: SharpNamedPipePTH\SharpNamedPipePTH.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  

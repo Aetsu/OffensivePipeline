@@ -3,3 +3,7 @@ tool:
     description: SharpWMI is a C# implementation of various WMI functionality.
     gitLink: https://github.com/GhostPack/SharpWMI
     solutionPath: SharpWMI\SharpWMI.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

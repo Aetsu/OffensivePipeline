@@ -3,3 +3,7 @@ tool:
     description: SharpDPAPI is a C# port of some DPAPI functionality from @gentilkiwi's Mimikatz project.
     gitLink: https://github.com/GhostPack/SharpDPAPI
     solutionPath: SharpDPAPI\SharpDPAPI.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

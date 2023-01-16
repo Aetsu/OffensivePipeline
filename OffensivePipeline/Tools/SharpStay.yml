@@ -3,3 +3,7 @@ tool:
     description: .NET Persistence
     gitLink: https://github.com/0xthirteen/SharpStay
     solutionPath: SharpStay\SharpStay\SharpStay.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken: 

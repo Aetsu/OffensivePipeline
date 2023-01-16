@@ -1,0 +1,9 @@
+tool:
+  - name: SharpDir
+    description: SharpDir is a simple code set to search both local and remote file systems for files using the same SMB process as dir.exe, which uses TCP port 445
+    gitLink: https://github.com/jnqpblc/SharpDir
+    solutionPath: SharpDir\SharpDir.sln
+    language: c#
+    plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
+    authUser:
+    authToken:  
