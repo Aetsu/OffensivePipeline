@@ -2,7 +2,8 @@
 
 ![](img/banner.PNG)
 
-OfensivePipeline allows you to download and build C# tools, applying certain modifications in order to improve their evasion for Red Team exercises. A common use of OffensivePipeline is to download a tool from a Git repository, randomise certain values in the project, build it, obfuscate the resulting binary and generate a shellcode.
+**OfensivePipeline** allows you to download and build C# tools, applying certain modifications in order to improve their evasion for Red Team exercises.   
+A common use of OffensivePipeline is to download a tool from a Git repository, randomise certain values in the project, build it, obfuscate the resulting binary and generate a shellcode.
 
 ## Features
 
