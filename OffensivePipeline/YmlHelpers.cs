@@ -46,7 +46,8 @@ namespace OffensivePipeline
                                     item.Children[new YamlScalarNode("language")].ToString(),
                                     item.Children[new YamlScalarNode("plugins")].ToString(),
                                     item.Children[new YamlScalarNode("authUser")].ToString(),
-                                    item.Children[new YamlScalarNode("authToken")].ToString()
+                                    item.Children[new YamlScalarNode("authToken")].ToString(),
+                                    item.Children[new YamlScalarNode("toolArguments")].ToString()
                                     ));
                             }
                             catch (Exception e)
@@ -61,7 +62,7 @@ namespace OffensivePipeline
             return lTools;
         }
 
-        public static List<ToolConfig> ReadYmls(string ymlName)
+        public static List<ToolConfig> ReadYmls(string ymlName, string overrideArguments)
         {
             List<ToolConfig> lTools = new List<ToolConfig>();
 
@@ -95,7 +96,8 @@ namespace OffensivePipeline
                                 item.Children[new YamlScalarNode("language")].ToString(),
                                 item.Children[new YamlScalarNode("plugins")].ToString(),
                                 item.Children[new YamlScalarNode("authUser")].ToString(),
-                                item.Children[new YamlScalarNode("authToken")].ToString()
+                                item.Children[new YamlScalarNode("authToken")].ToString(),
+                                (overrideArguments!=null) ? overrideArguments : item.Children[new YamlScalarNode("toolArguments")].ToString()
                                 ));
                         }
                         catch (Exception e)

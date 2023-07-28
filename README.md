@@ -188,6 +188,7 @@ tool:
     plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
     authUser:
     authToken: 
+    toolArguments: 
 ```
 
 Where:
@@ -213,6 +214,7 @@ tool:
     plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
     authUser: aaaaaaa
     authToken: abcdefghijklmnopqrsthtnf
+    toolArguments: "-c All,GPOLocalGroup -d whatever.youlike.local"
 ```
 
 Where:
@@ -226,6 +228,7 @@ Where:
 - AuthUser: user name from GitHub
 - AuthToken: auth token from GitHub (documented at GitHub: [creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 ))
+- toolArguments: arguments to be embedded in the donut shellcode
 
 ## Add a tool from local git folder
 
@@ -239,6 +242,7 @@ tool:
     plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
     authUser:
     authToken: 
+    toolArguments:
 ```
 
 Where:
@@ -251,6 +255,7 @@ Where:
 - Plugins: plugins to user on this tool build process
 - AuthUser: user name from github (not used for local repositories)
 - AuthToken: auth token from github (not used for local repositories)
+- toolArguments: arguments to be embedded in the donut shellcode
 
 ## Requirements for the release version (Visual Studio 2019/2022 is not required)
 

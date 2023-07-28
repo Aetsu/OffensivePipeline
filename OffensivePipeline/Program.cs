@@ -52,12 +52,12 @@ namespace OffensivePipeline
             Directory.CreateDirectory(Conf.outputPath);
         }
 
-        public static void LaunchPipeline(string toolName=null)
+        public static void LaunchPipeline(string toolName=null, string toolArguments=null)
         {
             List<ToolConfig> lTools = new List<ToolConfig>();
             if (toolName != null)
             {
-                lTools = YmlHelpers.ReadYmls(toolName);
+                lTools = YmlHelpers.ReadYmls(toolName, toolArguments);
             }
             else
             {
@@ -214,7 +214,7 @@ Examples:
  - List all tools:
     OffensivePipeline.exe list
  - Load seatbelt tool:
-    OffensivePipeline.exe t seatbelt
+    OffensivePipeline.exe t seatbelt [args]
  - Load all tools:
     OffensivePipeline.exe all
 ";
@@ -254,11 +254,14 @@ Examples:
                 command.Description = "Load the specified tool";
                 command.HelpOption("-?|-h|--help");
                 var toolArgument = command.Argument("[tool]", "Tool to build.");
+                var toolArguments = command.Argument("[args]", "Command-line arguments to pass to the tool in the Donut shellcode, will override the yaml value");
+                toolArguments.DefaultValue = "";
+
                 command.OnExecute(() =>
                 {
                     if (toolArgument.Value != null)
                     {
-                        LaunchPipeline(toolArgument.Value);
+                        LaunchPipeline(toolArgument.Value, toolArguments.Value);
                     }
                     Console.WriteLine();
                     return 0;

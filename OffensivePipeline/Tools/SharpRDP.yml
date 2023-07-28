@@ -6,4 +6,5 @@ tool:
     language: c#
     plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
     authUser:
-    authToken: 
+    authToken:     
+    toolArguments: 
