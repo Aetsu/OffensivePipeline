@@ -214,7 +214,7 @@ Examples:
  - List all tools:
     OffensivePipeline.exe list
  - Load seatbelt tool:
-    OffensivePipeline.exe t seatbelt [args]
+    OffensivePipeline.exe t seatbelt [-a/--args] [args]
  - Load all tools:
     OffensivePipeline.exe all
 ";
@@ -254,14 +254,13 @@ Examples:
                 command.Description = "Load the specified tool";
                 command.HelpOption("-?|-h|--help");
                 var toolArgument = command.Argument("[tool]", "Tool to build.");
-                var toolArguments = command.Argument("[args]", "Command-line arguments to pass to the tool in the Donut shellcode, will override the yaml value");
-                toolArguments.DefaultValue = "";
-
+                var toolArguments = command.Option("-a|--args", "Command-line arguments to pass to the Donut shellcode, will override the yaml value", CommandOptionType.SingleValue);
+                
                 command.OnExecute(() =>
                 {
                     if (toolArgument.Value != null)
                     {
-                        LaunchPipeline(toolArgument.Value, toolArguments.Value);
+                        LaunchPipeline(toolArgument.Value, toolArguments.Value());
                     }
                     Console.WriteLine();
                     return 0;
