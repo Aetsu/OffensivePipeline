@@ -7,3 +7,4 @@ tool:
     plugins: RandomGuid, RandomAssemblyInfo, BuildCsharp, ConfuserEx, Donut
     authUser:
     authToken: 
+    toolArguments: 

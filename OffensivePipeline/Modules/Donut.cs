@@ -46,6 +46,10 @@ namespace OffensivePipeline.Modules
                     config.Bypass = 3; //Behavior for bypassing AMSI/WLDP : 1=None, 2=Abort on fail, 3=Continue on fail.(default)
                     config.InputFile = exe;
                     config.Payload = Path.Combine(_moduleOutput.OutputPath, $"{_tool.name}.bin");
+                    if (_tool.toolArguments != "") {
+                        LogHelpers.PrintOk($"\t - Arguments passed to shellcode : \"{_tool.toolArguments}\"");
+                        config.Args = _tool.toolArguments;
+                    }
                     int ret = Generator.Donut_Create(ref config);
                     message = "\t\t[+] No errors!";
                     LogHelpers.PrintOk(message);

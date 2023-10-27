@@ -8,7 +8,7 @@ namespace OffensivePipeline
 {
     public class ToolConfig
     {
-        public ToolConfig(string name, string description, string gitLink, string solutionPath, string language, string plugins, string authUser, string authToken)
+        public ToolConfig(string name, string description, string gitLink, string solutionPath, string language, string plugins, string authUser, string authToken, string toolArguments)
         {
             this.name = name;
             this.description = description;
@@ -18,6 +18,7 @@ namespace OffensivePipeline
             this.plugins = plugins.Split(',').Select(s => s.Trim()).ToList<string>();
             this.authUser = authUser;
             this.authToken = authToken;
+            this.toolArguments = toolArguments;
         }
 
         public string name { get; set; }
@@ -28,5 +29,6 @@ namespace OffensivePipeline
         public List<string> plugins { get; set; }
         public string authUser { get; set; }
         public string authToken { get; set; }
+        public string toolArguments { get; set; }
     }
 }
