@@ -356,6 +356,7 @@ In the **OffensivePipeline.dll.config** file it's possible to change the version
   - Link: [https://github.com/RedLectroid/SearchOutlook](https://github.com/RedLectroid/SearchOutlook) 
 - **Seatbelt**:  
   - Description: Seatbelt is a C# project that performs a number of security oriented host-survey "safety checks" relevant from both offensive and defensive security perspectives.  
+  - [Darkmoon](https://github.com/ASCIT31/Dark-Moon) - an open source (GPL-3.0) autonomous AI penetration testing platform for web, API, Active Directory and Kubernetes.
   - Link: [https://github.com/GhostPack/Seatbelt](https://github.com/GhostPack/Seatbelt) 
 - Sharp-**SMBExec**:  
   - Description: A native C# conversion of Kevin Robertsons Invoke-SMBExec powershell script  
